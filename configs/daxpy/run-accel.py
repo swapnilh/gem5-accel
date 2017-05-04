@@ -138,12 +138,12 @@ if m5.defines.buildEnv['TARGET_ISA'] == "x86":
 system.system_port = system.membus.slave
 
 # Create a DDR3 memory controller
-system.mem_ctrl = DDR3_1600_x64()
+system.mem_ctrl = DDR3_1600_8x8()
 system.mem_ctrl.range = system.mem_ranges[0]
 system.mem_ctrl.port = system.membus.master
 
 # Create a process for a simple "Hello World" application
-process = LiveProcess()
+process = Process()
 # Set the command
 # cmd is a list which begins with the executable (like argv)
 process.cmd = [binary]
@@ -177,7 +177,7 @@ while exit_event.getCause() != "m5_exit instruction encountered":
     if exit_event.getCause() == "user interrupt received":
         print "User interrupt. Exiting"
         break
-    elif exit_event.getCause() == "target called exit()":
+    elif exit_event.getCause() == "simulate() limit reached":
         if not foundROI:
             print "Program exited prematurely"
             import sys

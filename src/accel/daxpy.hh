@@ -172,12 +172,12 @@ class DaxpyDriver : public EmulatedDriver
     typedef DaxpyDriverParams Params;
     DaxpyDriver(Params *p) : EmulatedDriver(p), hardware(p->hardware) {}
 
-    int open(LiveProcess *p, ThreadContext *tc, int mode, int flags) {
+    int open(Process *p, ThreadContext *tc, int mode, int flags) {
         hardware->open(tc);
         return 1;
     }
 
-    int ioctl(LiveProcess *p, ThreadContext *tc, unsigned req) {
+    int ioctl(Process *p, ThreadContext *tc, unsigned req) {
         panic("Daxpy driver doesn't implement any ioctls");
         M5_DUMMY_RETURN
     }
